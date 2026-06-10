@@ -1,8 +1,8 @@
 <div>
 
-  <h4>Consulta de Produtos</h4>
-  <p>
-    Pesquise os produtos através do nome
+  <h4>Consulta de produtos</h4>
+  <p>    
+    Pesquise os produtos através do nome:    
   </p>
 
   <div>
@@ -11,5 +11,42 @@
       Pesquisar
     </button>
   </div>
+
+  @if(produtos().length > 0) {
+    <table>
+      <thead>
+        <tr>
+          <th>Nome do produto</th>
+          <th>Descrição</th>
+          <th>Preço</th>
+          <th>Quantidade</th>
+          <th>Total</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(p of produtos(); track p.id) {
+          <tr>
+            <td>{{ p.nome | uppercase }}</td>
+            <td>{{ p.descricao }}</td>
+            <td>{{ p.preco | currency: 'R$ ' }}</td>
+            <td>{{ p.quantidade }}</td>
+            <td>{{ p.total | currency: 'R$ ' }}</td>
+            <td>
+              <button>Editar</button>
+              <button>Excluir</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="6">
+            Quantidade de produtos: {{ produtos().length }}
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  }
 
 </div>
